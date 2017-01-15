@@ -4,6 +4,7 @@ def _get_value_from_dict(data, keys):
     for k in keys:
         v = v.get(k)
         if v is None:
+            print('invalid keys: ' + str(keys))
             break
     return v
 
@@ -25,7 +26,7 @@ def tree_to_flat(tree_dict, mapping_rule):
             v = _list_mapping(_get_value_from_dict(tree_dict, m[0]), m[2])
         else:
             v = None
-            print('invalid mapping rule:', m)
+            print('invalid mapping rule:' + str(m))
         if v is None:
             continue
         flat_dict.update({m[1]: v})
@@ -35,8 +36,8 @@ def tree_to_flat(tree_dict, mapping_rule):
 def main():
     '''demo'''
 
-    # print(tree_to_flat(in_data, mapping))
-    print(tree_to_flat(in_data, [(1,2,3,4)]))
+    print(tree_to_flat(in_data, mapping))
+    print(tree_to_flat(in_data, [(['1'],'2'),(1,2,3,4)]))
 
 
 if __name__ == '__main__':
